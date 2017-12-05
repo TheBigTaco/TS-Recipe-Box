@@ -1,1 +1,46 @@
+.recipe {
+  padding-bottom: 20px;
+}
 
+.name-form, .ingredient-form, .direction-form {
+  display: flex;
+}
+
+input, button {
+  display: none;
+}
+
+form {
+  float: right;
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background-color: red;
+  input {
+    position: absolute;
+    top: 0;
+  }
+  button {
+    position: absolute;
+    top: 40px;
+  }
+}
+
+button:last-of-type {
+  position: absolute;
+  top: 60px;
+  left: 30px;
+  background-color: green;
+}
+
+button:nth-of-type(3) {
+  position: absolute;
+  top: 60px;
+  left: 30px;
+  background-color: yellow;
+}
+
+.blue {
+  color: blue;
+  background-color: green;
+}
