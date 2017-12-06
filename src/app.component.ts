@@ -4,25 +4,47 @@ import {Component} from '@angular/core';
   selector: 'app-root',
   template: `
   <div class="container">
-    <div class="jumbotron">
-      <h1>Recipe Box</h1>
+    <div class="form">
+      <form>
+        <h2>Enter your recipe:</h2>
+        <input [class]="showName()" [value]="name" (input)="name = $event.target.value" type="text">
+        <button (click)="changeRecipeName()" [class]="showName()" class="btn">Recipe Name</button>
+        <br>
+        <input [class]="showIngredient()" [value]="ingredient" (input)="ingredient = $event.target.value" type="text">
+        <button [class]="showIngredient()" (click)="addIngredient()">Add Ingredient</button>
+        <button [class]="showIngredient()" (click)="nextStep()">Next Step</button>
+        <br>
+        <input [class]="showDirection()" [value]="direction" (input)="direction = $event.target.value" type="text">
+        <button [class]="showDirection()" (click)="addDirection()">Add Direction</button>
+        <br>
+        <button [class]="showDirection()" (click)="previousStep2()">Previous Step</button>
+        <button [class]="showDirection()" id="next" (click)="nextRecipe()">Next Recipe</button>
+      </form>
     </div>
-    <form>
-    <input [class]="showName()" [value]="name" (input)="name = $event.target.value" type="text">
-    <button (click)="changeRecipeName()" [class]="showName()">Recipe Name</button>
-    <br>
-    <input [class]="showIngredient()" [value]="ingredient" (input)="ingredient = $event.target.value" type="text">
-    <button [class]="showIngredient()" (click)="addIngredient()">Add Ingredient</button>
-    <button [class]="showIngredient()" (click)="nextStep()">Next Step</button>
-    <br>
-    <input [class]="showDirection()" [value]="direction" (input)="direction = $event.target.value" type="text">
-    <button [class]="showDirection()" (click)="addDirection()">Add Direction</button>
-    <br>
-    <button [class]="showDirection()" id="next" (click)="nextRecipe()">Next Recipe</button>
-    </form>
+    <div class="output">
     <ul>
-    <li class="recipe" *ngFor="let recipe of recipes">{{recipe.name}} <br> Ingredients: <ul><li *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}}</li></ul>Directions:<ul><li *ngFor="let direction of recipe.directions">{{direction.name}}</li></ul></li>
+    <li class="recipe" *ngFor="let recipe of recipes">
+    <div class="image-wrap"></div>
+    <div class="content-wrap">
+    <h3 class="recipe-title">{{recipe.name}}</h3>
+    <div class="items-a"><span class="subheader">Ingredients:</span><ul>
+    <li *ngFor="let ingredient of recipe.ingredients">
+    {{ingredient.name}}
+    </li>
     </ul>
+    </div>
+    <div class="items-b"><span class="subheader">Directions:<br></span>
+    <ul>
+    <li *ngFor="let direction of recipe.directions">
+    {{direction.name}}
+    </li>
+    </ul>
+    </div>
+    <button class="delete" (click)="delete(recipe)">Delete</button>
+    </div>
+    </li>
+    </ul>
+    </div>
   </div>
   `
 })
@@ -40,7 +62,11 @@ export class AppComponent {
     this.ingredient = "";
     this.direction = "";
   }
-
+  delete(recipe) {
+    let numver = this.recipes.indexOf(recipe);
+    this.recipes.splice(numver, 1);
+    this.currentlyActive = "name";
+  }
   changeRecipeName() {
     this.recipes.push(new Recipe(this.name, this.ingredients, this.directions));
     this.name = "";
@@ -65,6 +91,12 @@ export class AppComponent {
 
   nextStep() {
     this.currentlyActive = "direction";
+  }
+  previousStep() {
+    this.currentlyActive = "name";
+  }
+  previousStep2() {
+    this.currentlyActive = "ingredient";
   }
 
   showName() {
