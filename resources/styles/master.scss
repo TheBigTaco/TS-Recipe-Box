@@ -144,7 +144,12 @@ button:nth-of-type(3) {
   left: 15%;
   background-color: #d65c11;
 }
-
+button:nth-of-type(5) {
+  position: absolute;
+  top: 90%;
+  left: 15%;
+  background-color: #d65c11;
+}
 button.delete {
   display: block;
   width: 100px;

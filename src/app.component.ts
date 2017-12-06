@@ -65,6 +65,8 @@ export class AppComponent {
   delete(recipe) {
     let numver = this.recipes.indexOf(recipe);
     this.recipes.splice(numver, 1);
+    this.directions = [];
+    this.ingredients = [];
     this.currentlyActive = "name";
   }
   changeRecipeName() {
