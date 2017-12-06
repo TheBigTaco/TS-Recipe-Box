@@ -7,13 +7,7 @@ var utilities = require('gulp-util');
 var del = require('del');
 var lib = require('bower-files')({
   "overrides": {
-    "bootstrap" : {
-      "main": [
-        "less/bootstrap.less",
-        "dist/css/bootstrap.css",
-        "dist/js/bootstrap.js"
-      ]
-    }
+
   }
 });
 var sass = require('gulp-sass');
